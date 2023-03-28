@@ -1,5 +1,6 @@
 import 'package:akquinet_bildersuche/feature/bildersuche/provider/pixabay_bildersuche_provider.dart';
 import 'package:akquinet_bildersuche/ui/bildersuche/bildersuche_screen_liste_bilder.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../style.dart';
@@ -49,7 +50,10 @@ class BildersucheScreen extends ConsumerWidget {
               runSpacing: smallSpace,
               children: [
                 const Text("Powered by"),
-                Image.asset("images/pixabay_logo.png", width: 150),
+                Image.asset(
+                  "${kIsWeb ? "assets/" : ""}images/pixabay_logo.png",
+                  width: 150,
+                ),
               ],
             ),
           ],

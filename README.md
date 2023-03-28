@@ -21,17 +21,33 @@ Als Backend soll eine Bildersuchservice mit einer REST Schnittstelle angebunden 
 Zu der Arbeitsprobe gehört auch eine gute Präsentation der Ergebnisse. Diese sollte wie bei einem Zwischenergebnis vor dem Kunden oder den Kollegen des Projektteams durchgeführt werden.
 
 ## Umsetzung
+Um den zeitlichen Rahmen des Projekts nicht zu überschreiten wird auf verschiedene Dinge, wie eine Willkommensseite, Einstellungen, verschiedene Sprachen, Tests, u.ä., verzichtet. 
+
+### Hosting
 Der Einfachheit halber wird die Webapp mit dem Python http.server lokal gehostet (siehe https://docs.flutter.dev/deployment/web).
 
-Es wird außerdem auf eine Willkommensseite, Einstellungen und verschiedene Sprachen verzichtet. Diese Webapp ist weder hundert prozent sicher noch durchgehend getestet.
+> Problem Preflight Request wegen nicht erlaubter Options Methode, siehe https://stackoverflow.com/questions/64955435/flutter-web-cors-issue
 
-> Dieses Projekt sollte nicht zu Produktivzwecken verwendet werden.
+Zu Demonstationszwecken als Chrome Release ausführen, verzichtet auf Preflight Request.
 
-### Statemanagement und Fehlerbehandlung
-Für die Datenbereistellung und Trennung zwischen UI und Buisness Logik wird das Package Riverpod verwendet. Dieses bringt zudem die AsyncValue Klasse mit, welche sich sehr gut für die Fehlerbehandlung eignet. Fehler werden geloggt. Alle für den Nutzer relvanten Fehlermeldungen werden entsprechend dargestellt.
+### Backend
+Als Backend habe ich mich für Pixabay aus folgenden Gründen entschieden.
+
+- Einfacher Aufbau
+- gute Dokumentation
+- keine Kosten bei Überschreitung von Suchanfragen
+
+Über eine Abstraktion der Bildersuche, ließe sich die Webapp leicht an andere Backends anpassen. 
+
+### Statemanagement
+Für die Datenbereistellung und Trennung zwischen UI und Buisness Logik wird das Package Riverpod verwendet. 
+
+### Fehlerbehandlung
+Riverpod bringt zudem die AsyncValue Klasse mit, welche sich sehr gut für die Fehlerbehandlung eignet. Alle für den Nutzer relvanten Fehlermeldungen werden entsprechend dargestellt. 
+Zusätlich werden alle Fehler geloggt.
 
 ### Api Keys
-Die verwendeten Api Keys sind lokal im Ordner lib/keys als .dart Dateien gespeichert. Ein Eintrag in .gitignore verhindert das veröffentlichen dieser. 
+Die verwendeten API Keys sind lokal im Ordner lib/keys als .dart Dateien gespeichert. Ein Eintrag in .gitignore verhindert das veröffentlichen dieser. 
 
 ### Pagination
-Da beide vorgeschlagenen Bildersuchservices Pagination mitbringen, wird dieses entsprechend implementiert.
+Da das Backend Pagination mitbringt und dies aus meiner Sicht bei einer langen Liste an Bildern unabdingbar ist, habe ich dieses als Infinite Scroll implementiert.
